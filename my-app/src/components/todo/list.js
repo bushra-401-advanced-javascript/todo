@@ -1,21 +1,37 @@
 import React from 'react';
-import ListGroup from 'react-bootstrap/ListGroup';
-
+import { Card } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 function TodoList(props) {
   return (
-    <ListGroup>
+    <ul>
       {props.list.map((item) => (
-        <ListGroup.Item
-          variant={item.complete ? 'success' : 'danger'}
-          key={item._id}
-        >
-          <span onClick={() => props.handleComplete(item._id)}>
-            {item.text}
-          </span>
-        </ListGroup.Item>
+        <li className={`complete-${item.complete.toString()}`} key={item._id}>
+          <Card style={{ width: '22rem' }}>
+            <Card.Body>
+              <div className="topname">
+                <h3 onClick={() => props.handleComplete(item._id)}>
+                  {`${item.complete ? 'complete' : 'pending'}`}
+                </h3>
+                <Card.Title
+                  className="name"
+                  variant="border-bottom border-dark"
+                >
+                  {item.assignee}
+                </Card.Title>
+                <button
+                  className="xButton"
+                  onClick={() => props.handleDelete(item._id)}
+                >
+                  x
+                </button>
+              </div>
+              <div className="contentInformation"> {item.text} </div>
+              <div className="diff"> Difficulty : {item.difficulty}</div>
+            </Card.Body>
+          </Card>
+        </li>
       ))}
-    </ListGroup>
+    </ul>
   );
 }
-
 export default TodoList;
