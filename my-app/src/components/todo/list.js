@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Card } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { SettingsContext } from '../../context/site.js';
+
 function TodoList(props) {
+
+    const SiteSettings = useContext(SettingsContext);
+
   return (
     <ul>
       {props.list.map((item) => (
